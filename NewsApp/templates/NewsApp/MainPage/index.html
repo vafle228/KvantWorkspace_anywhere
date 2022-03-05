@@ -1,0 +1,207 @@
+{% load static %}
+{% load base_tags %}
+{% load news_tags %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    
+    {% include "CoreApp/HeadSetup/index.html" %}
+    <link rel='stylesheet' href='{% static "CoreApp/icons/files/file-icons.css" %}'/>
+    <link rel="stylesheet" href='{% static "NewsApp/MainPage/style.css" %}'> <!-- Стили страницы -->
+    <link rel="stylesheet" href='{% static "CoreApp/text/ql-editor.css" %}'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"/> <!-- Слайдер -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.9/dist/katex.min.css" integrity="sha384-r/BYDnh2ViiCwqZt5VJVWuADDic3NnnTIEOv4hOh05nSfB6tjWpKmn1kUHOVkMXc" crossorigin="anonymous"> <!-- Стили для отображения формул -->
+
+    <title>Главная</title>
+</head>
+
+<body onload="getNewNews();">
+    <!-- Навигационное меню -->
+    {% include "CoreApp/AsideMenu/index.html" with user=user active='main_page' %}
+    
+    <section class="mainContainer column">
+
+        <div id="today" class="column g16">
+
+            <div class="flex space-between items-center g16">
+                <h1>Сегодня</h1>
+                <div class="row g16">
+                    <h1>22 февраля 2022</h1> 
+                    <svg style='width: 1.5rem; fill: var(--currentColor)' viewBox="0 0 448 512">
+                        <path d="M96 32C96 14.33 110.3 0 128 0C145.7 0 160 14.33 160 32V64H288V32C288 14.33 302.3 0 320 0C337.7 0 352 14.33 352 32V64H400C426.5 64 448 85.49 448 112V192H0V112C0 85.49 21.49 64 48 64H96V32z"/>
+                        <path style='opacity: .4' d="M448 464C448 490.5 426.5 512 400 512H48C21.49 512 0 490.5 0 464V192H448V464zM80 256C71.16 256 64 263.2 64 272V368C64 376.8 71.16 384 80 384H176C184.8 384 192 376.8 192 368V272C192 263.2 184.8 256 176 256H80z"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div id="todayCarousel" class="carousel">
+                <div class="carousel__slide lesson">
+                    <p class="lesson__time">9:00</p>
+                    <div class="lesson__info column g4">
+                        <p class="lesson__group">Группа</p>
+                        <p class="lesson__topic">Тема занятия</p>
+                    </div>
+                </div>
+                <div class="carousel__slide lesson">
+                    <p class="lesson__time">10:15</p>
+                    <div class="lesson__info column g4">
+                        <p class="lesson__group">IT 1-1</p>
+                        <p class="lesson__topic">Паттерны проектирования</p>
+                    </div>
+                </div>
+                <div class="carousel__slide lesson">
+                    <p class="lesson__time">11:45</p>
+                    <div class="lesson__info column g4">
+                        <p class="lesson__group">IT 1-1</p>
+                        <p class="lesson__topic">Паттерны проектирования</p>
+                    </div>
+                </div>
+                <div class="carousel__slide lesson">
+                    <p class="lesson__time">13:30</p>
+                    <div class="lesson__info column g4">
+                        <p class="lesson__group">IT 1-1</p>
+                        <p class="lesson__topic">Паттерны проектирования</p>
+                    </div>
+                </div>
+                <div class="carousel__slide lesson">
+                    <p class="lesson__time">15:00</p>
+                    <div class="lesson__info column g4">
+                        <p class="lesson__group">IT 1-1</p>
+                        <p class="lesson__topic">Паттерны проектирования</p>
+                    </div>
+                </div>
+                <div class="carousel__slide lesson">
+                    <p class="lesson__time">16:45</p>
+                    <div class="lesson__info column g4">
+                        <p class="lesson__group">IT 1-1</p>
+                        <p class="lesson__topic">Паттерны проектирования</p>
+                    </div>
+                </div>
+                <div class="carousel__slide lesson">
+                    <p class="lesson__time">18:20</p>
+                    <div class="lesson__info column g4">
+                        <p class="lesson__group">IT 1-1</p>
+                        <p class="lesson__topic">Паттерны проектирования</p>
+                    </div>
+                </div>
+                <div class="carousel__slide lesson">
+                    <p class="lesson__time">19:30</p>
+                    <div class="lesson__info column g4">
+                        <p class="lesson__group">IT 1-1</p>
+                        <p class="lesson__topic">Паттерны проектирования</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Виджеты -->
+        <section id='widgets' class='row g16'>
+
+            <!-- Виджет "Календарь" -->
+            <div id="eventsWidget">
+                <div id="eventCarousel" class="carousel">
+                    <div class="carousel__slide event">
+                        <img src="https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__480.jpg" class='event__banner'>
+                        <div class="event__content column g16">
+                            <p class="event__tag">Событие</p>
+                            <h2 class="event__title">Настала пора зимних праздников: "Зимняя сказка"</h2>
+                            <p class="event__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id quas, accusamus quaerat numquam dicta corporis perspiciatis amet quae. Voluptas itaque dolor facere ab! A, repudiandae reprehenderit at tempora nostrum laborum facilis ex repellat nemo quo temporibus, tenetur nobis magnam incidunt dolorum officiis. Aperiam perspiciatis quaerat ullam architecto suscipit! Qui ab ipsa itaque nam suscipit, dolor facere adipisci ad distinctio quibusdam, modi dolorum illo ut corporis velit? Provident, sapiente vel, autem dolore perspiciatis excepturi architecto nulla dolorum sunt natus maxime debitis odio, id fugiat rerum ea animi modi ex porro praesentium cumque. Temporibus similique sed possimus molestiae qui. Illum, temporibus impedit.</p>
+                            <button class="event__button">Подробнее</button>
+                        </div>
+                    </div>
+                    <div class="carousel__slide event">
+                        <img src="https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__480.jpg" class='event__banner'>
+                        <div class="event__content column g16">
+                            <p class="event__tag">Событие</p>
+                            <h2 class="event__title">Настала пора зимних праздников: "Зимняя сказка"</h2>
+                            <p class="event__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id quas, accusamus quaerat numquam dicta corporis perspiciatis amet quae. Voluptas itaque dolor facere ab! A, repudiandae reprehenderit at tempora nostrum laborum facilis ex repellat nemo quo temporibus, tenetur nobis magnam incidunt dolorum officiis. Aperiam perspiciatis quaerat ullam architecto suscipit! Qui ab ipsa itaque nam suscipit, dolor facere adipisci ad distinctio quibusdam, modi dolorum illo ut corporis velit? Provident, sapiente vel, autem dolore perspiciatis excepturi architecto nulla dolorum sunt natus maxime debitis odio, id fugiat rerum ea animi modi ex porro praesentium cumque. Temporibus similique sed possimus molestiae qui. Illum, temporibus impedit.</p>
+                            <button class="event__button">Подробнее</button>
+                        </div>
+                    </div>
+                    <div class="carousel__slide event">
+                        <img src="https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__480.jpg" class='event__banner'>
+                        <div class="event__content column g16">
+                            <p class="event__tag">Событие</p>
+                            <h2 class="event__title">Настала пора зимних праздников: "Зимняя сказка"</h2>
+                            <p class="event__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id quas, accusamus quaerat numquam dicta corporis perspiciatis amet quae. Voluptas itaque dolor facere ab! A, repudiandae reprehenderit at tempora nostrum laborum facilis ex repellat nemo quo temporibus, tenetur nobis magnam incidunt dolorum officiis. Aperiam perspiciatis quaerat ullam architecto suscipit! Qui ab ipsa itaque nam suscipit, dolor facere adipisci ad distinctio quibusdam, modi dolorum illo ut corporis velit? Provident, sapiente vel, autem dolore perspiciatis excepturi architecto nulla dolorum sunt natus maxime debitis odio, id fugiat rerum ea animi modi ex porro praesentium cumque. Temporibus similique sed possimus molestiae qui. Illum, temporibus impedit.</p>
+                            <button class="event__button">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Виджет "Расписание" -->
+            {% include "NewsApp/CourseShedule/index.html" with courses=courses %}  
+        </section>
+        
+        <!-- Новости -->
+        <section id='news' class='column g24'>
+
+            <div class='row g24'>
+                <h1>Новости</h1>
+                {% if user.permission != 'Ученик' %}
+                <button class='primaryButton' onclick="open_form('#news-form')">Добавить новость</button>
+                {% endif %}
+                <!-- <input type="text" class='newsSearch' placeholder="🔍︎"> -->
+            </div>
+
+            <!-- Блок новостей -->
+            <div id='news__container' class='newsContainer'>
+                <!-- Спавн новсотей :\ -->
+            </div>
+            
+            <button onclick="getNewNews()" class='primaryButton' style='margin: 0 auto' id='more'>Больше новостей</button>
+            {% include "NewsApp/NewsCreationForm/index.html" with form_status="create" %}
+        </section>
+    </section>
+    
+    <div class="alertsContainer column" id='alertsContainer'></div>
+    
+    <script src="{% static 'NewsApp/MainPage/scripts.js' %}"></script>
+    <script src="{% static 'NewsApp/Core/scripts.js' %}"></script>
+    
+    <!-- Сама панель инструментов -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="{% static 'CoreApp/text/options.js' %}"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+    
+    <script>
+        const news_per_page_num = 8;
+        const all_news = parseInt('{{ max_news }}');
+        
+        function getNewNews(){
+            $.ajax({
+                type: 'GET',
+                url: `{% url "send_news" %}`,
+                data: {'page': page},
+                cache: false,
+                success: function(response){
+                    $('#news__container').append(response);
+                    if(page * news_per_page_num >= all_news)  // Проверка наличия еще страниц пагинации
+                        $("#more")[0].style.display = 'none';
+                    page++
+                }
+            })
+        }
+    </script>
+    <script>
+        const todayCarousel = new Carousel(document.querySelector("#todayCarousel"), {
+            center: false,
+            slidesPerPage : 1,
+            Dots: false,
+            infinite: false,
+            friction: 0.8,
+        });
+
+        const myCarousel = new Carousel(document.querySelector("#eventCarousel"), {
+            Dots: true,
+            infinite: true,
+            friction: 0.9,
+        });
+        setInterval(() => myCarousel.slideTo(myCarousel.pageIndex + 1), 10000)
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% for news in all_news %}
+    <div class="newsItem" onclick="location.href=`{% url 'detail_news' news.id %}`"
+    style="background: linear-gradient(0deg, #0008 30%, #fff4 100%), url('{{ news.image.url }}'); background-size: cover;">
+    <div class="newsItem__author">
+        <img src="{{ news.author.image.url }}" class="avatar">
+        <p>{{ news.author.surname }} {{ news.author.name }}</p>
+    </div>
+    <p class="newsItem__title">{{ news.title }}</p>
+    <p class="newsItem__date">{{ news.date|date:"j F Y" }}</p>
+    </div>
+{% endfor %}
