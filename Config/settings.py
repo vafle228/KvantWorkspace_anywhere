@@ -11,22 +11,23 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from .secret import *
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'o$7w4ngqrd#3q%za!pz6&drr+_ccfgf(^v#g4rac6ud=c%vc@*'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['kvantworkspace.pythonanywhere.com']
 
 
 # Application definition
@@ -137,9 +138,15 @@ USE_TZ = True
 # Setup медиа и статик файлов
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+
+
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 # AWS S3 Setup
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+
 AWS_STORAGE_BUCKET_NAME = 'kvant-journal'  # Имя бакета
 
 AWS_S3_FILE_OVERWRITE = False  # Запретить перезапись файла

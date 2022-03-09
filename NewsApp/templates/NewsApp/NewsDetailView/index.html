@@ -44,7 +44,7 @@
                         </svg>
                     </button>
                     <div class="list">
-                        <button class="listButton" onclick="open_form('#editNewsItemForm')">
+                        <button class="listButton" onclick="open_form('#newNewsItemForm')">
                             Редактировать
                             <svg viewBox="0 0 576 512">
                                 <path d="M564.6 60.2l-48.8-48.8a39.11 39.11 0 0 0-55.2 0l-35.4 35.4a9.78 9.78 0 0 0 0 13.8l90.2 90.2a9.78 9.78 0 0 0 13.8 0l35.4-35.4a39.11 39.11 0 0 0 0-55.2zM427.5 297.6l-40 40a12.3 12.3 0 0 0-3.5 8.5v101.8H64v-320h229.8a12.3 12.3 0 0 0 8.5-3.5l40-40a12 12 0 0 0-8.5-20.5H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V306.1a12 12 0 0 0-20.5-8.5z" opacity='0.6'></path>
@@ -72,7 +72,7 @@
                                     <button class='secondaryButton'>
                                         Отмена
                                     </button>
-                                    <button class='dangerButton' onclick="delConfirm()">
+                                    <button class='dangerButton' type="button" onclick="delConfirm()">
                                         <svg viewBox="0 0 448 512">
                                             <path d="M53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 96H32zm47.18-221.47l84-81.59c8.84-8.59 23.61-2.24" opacity='0.6'></path>
                                             <path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM208"></path>
@@ -182,10 +182,12 @@
                 type: 'POST',
                 url: '{% url "delete_news" news.id %}',
                 data:{
+                    'confirm': true,
                     'csrfmiddlewaretoken': getCookie('csrftoken'),
                 },
                 cache: false,
                 success: function(response){
+                    console.log('123')
                     location.href = '{% url "main_page" %}'
                 }
             })

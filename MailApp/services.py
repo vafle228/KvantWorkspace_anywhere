@@ -1,5 +1,5 @@
 from CoreApp.services.access import KvantObjectExistsMixin
-from CoreApp.services.utils import ObjectManupulationResponse
+from CoreApp.services.utils import ObjectManipulationManager
 from django.urls import reverse_lazy as rl
 from LoginApp.models import KvantUser
 
@@ -20,9 +20,9 @@ def makeMailImportant(user, mail_id):
 
 
 class MailBoxQuerySelector:
-    """ Класс получения множества писем по type и search """
-    def __init__(self, type, search=None):
-        self.box_type = type
+    """ Класс получения множества писем по box_type и search """
+    def __init__(self, box_type, search=None):
+        self.box_type = box_type
         self.search_param = search
     
     def getBoxQuery(self, user):
@@ -52,7 +52,7 @@ class MailBoxQuerySelector:
         return query.filter(title__contains=self.search_param)
 
 
-class MailObjectManupulationResponse(ObjectManupulationResponse):
+class MailObjectManipulationManager(ObjectManipulationManager):
     def _constructRedirectUrl(self, obj):
         return rl('mail_box') + '?type=received'
 
