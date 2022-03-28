@@ -60,5 +60,5 @@ txaio==22.2.1
 typing-extensions==4.1.1
 uritemplate==3.0.1
 urllib3==1.26.3
+whitenoise==6.0.0
 zope.interface==5.4.0
-psycopg2==2.8.6
