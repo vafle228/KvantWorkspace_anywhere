@@ -17,7 +17,7 @@
                 </p>
             </div>
             <div class="row g4" style='margin-left: auto'>
-                {% with 'Пн Вт Ср Чт Пт Сб Вс' as week_days %}
+                {% with 'ПН ВТ СР ЧТ ПТ СБ ВС' as week_days %}
 
                     {% for week_day in week_days.split %}
 
@@ -48,9 +48,9 @@
     </div>
 
     {% for course in courses %}
-    <div class='form'>
-        <div class="form-wrapper">
-            <form>
+    <div class='modal' id="courseAbout">
+        <div class="modal__viewport">
+            <form class="modal__content">
                 <div class='course row g16'>
                     <img src="{{ course.type.image.url }}" class='course__illustration'/>
                     <div class="course__info column g4">
@@ -62,7 +62,7 @@
                         </p>
                     </div>
                     <div class="row g4" style='margin-left: auto'>
-                        {% with 'Пн Вт Ср Чт Пт Сб Вс' as week_days %}
+                        {% with 'ПН ВТ СР ЧТ ПТ СБ ВС' as week_days %}
 
                             {% for week_day in week_days.split %}
 
@@ -91,7 +91,7 @@
                 <div class="users">
                     {% for user in course.students|get_objects %}
 
-                        <div class="user row g8 items-center">
+                        <div class="user row g8 items-center" onclick="location.href=`{% url 'settings_page' user.id %}`">
                             <img src="{{ user.image.url }}" class='user__img avatar'/>
                             <div class="user__info column">
                                 <p class='user__name'>

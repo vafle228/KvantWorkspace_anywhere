@@ -1,14 +1,30 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
 .mainContainer > header{
     width: calc(100% - 32rem - 1.5rem);
 }
 
 .Tab{
-    display: none; flex-direction: column; gap: 1.5rem;
+    display: none; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; gap: 1.5rem;
     width: calc(100% - 32rem - 1.5rem);
     padding-bottom: 1.5rem;
+    position: relative;
 }
 .Tab.active{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+}
+
+@media screen and (max-width: 420px){
+    .menu__button p{
+        display: none !important;
+    }
 }
 
 /* .project{
@@ -16,22 +32,59 @@
 .project__banner{
     height: 32rem;
     border-radius: 1rem;
-    object-fit: cover;
-    object-position: center;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: center;
+       object-position: center;
 }
 .project__title{
     font-size: 2.5rem;
     font-weight: 500;
 }
 
-.application__textarea{
-    background-color: var(--aside-bg-color);
+/* Заявка */
+.applicationForm{
+    background-color: var(--item-bg-color);
+    padding: 1rem;
+    border-radius: 1rem;
 }
-.application__header h2{
+.applicationForm__header{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; -webkit-box-align: center; -ms-flex-align: center; align-items: center;
+}
+.applicationForm__header h2{
     font-weight: 500;
     font-size: 2rem;
 }
+.applicationForm__textarea{
+    background-color: var(--theme-light-alpha);
+}
+.applicationForm p{
+    font-size: 1.25rem;
+}
 
+@media screen and (max-width: 576px){
+    .applicationForm__header{
+        -webkit-box-pack: unset;
+            -ms-flex-pack: unset;
+                justify-content: unset;
+        -webkit-box-align: unset;
+            -ms-flex-align: unset;
+                align-items: unset;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column; gap: 1rem;
+    }
+    .applicationForm__header button{
+        width: -webkit-min-content;
+        width: -moz-min-content;
+        width: min-content;
+    }
+}
+
+/* Участник */
 .member{
     height: 3rem;
     border-radius: 1.5rem;
@@ -44,6 +97,8 @@
 .member__info{
     width: 0;
     overflow: hidden;
+    -webkit-transition: all .5s;
+    -o-transition: all .5s;
     transition: all .5s;
     opacity: 0;
 }
@@ -58,7 +113,8 @@
     font-weight: 500;
     font-size: 1.25rem;
     overflow: hidden;
-    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
 }
 
 .project__members.expanded .member{
@@ -83,6 +139,9 @@
 } */
 .board__section{
     width: calc((100% - 4rem) / 5);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; gap: 1rem;
 }
 .board__sectionHeader{
     height: 3rem; width: 100%;
@@ -109,16 +168,27 @@
     padding-bottom: 16rem;
 }
 
+/* Задача */
 .task{
     border-radius: 0.5rem;
     padding: 1rem;
     background-color: var(--item-bg-color);
     border: var(--theme-light) solid 1px;
+    -webkit-transition: -webkit-transform .2s;
+    transition: -webkit-transform .2s;
+    -o-transition: transform .2s;
     transition: transform .2s;
+    transition: transform .2s, -webkit-transform .2s;
     cursor: pointer;
 }
 .task:hover{
-    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+        -ms-transform: scale(1.02);
+            transform: scale(1.02);
+}
+.light__theme .task:hover{
+    -webkit-box-shadow: 0 0 1rem var(--theme-light);
+            box-shadow: 0 0 1rem var(--theme-light);
 }
 
 .task__title{
@@ -150,8 +220,12 @@
 }
 
 .task__deadline{
-    display: flex; flex-direction: row; gap: 0.5rem;
-    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; gap: 0.5rem;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 .task__deadline svg{
     width: 1rem; height: 1rem;
@@ -212,33 +286,46 @@
     color: var(--text-primary-color);
 }
 
+
+.task__footer{
+    height: 2.25rem;
+}
 .task__users{
     margin-left: auto;
 }
 .task__user .avatar{
     width: 2rem; height: 2rem;
     margin-left: -0.5rem;
-    border: var(--item-bg-color) solid 2px;
+    border: var(--item-bg-color) solid 0.125rem;
 }
 
 
+/* Чат */
 .chat{
     position: fixed; top: 0; right: 0;
     width: 32rem; height: calc(100% - 3rem);
+    max-width: calc(100% - 3rem);
     background-color: var(--item-bg-color);
     padding: 1.5rem;
     border-radius: 1rem;
     border: var(--theme-light) solid 1px;
     margin: 1.5rem;
 }
+.chat__header{
+    display: none;
+    margin-bottom: 1.5rem;
+}
 
 .chat__history{
-    height: 100%;
+    height: calc(100% - 5rem);
     overflow: auto;
 }
 
+/* Сообщение */
 .message{
-    align-items: flex-start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
 }
 .message__sender{
     width: 2rem; height: 2rem;
@@ -257,9 +344,11 @@
     font-weight: 400;
 }
 
-
 .message.myMessage{
-    flex-direction: row-reverse;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
 }
 .message.myMessage .message__bubble{
     border-radius: 0.75rem 0 0.75rem 0.75rem;
@@ -269,10 +358,9 @@
     color: #fff;
 }
 
-
 .chat__input{
     height: 4rem;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     overflow: hidden;
 }
 .chat__input input{
@@ -284,9 +372,6 @@
     font-size: 1.125rem;
     font-weight: 400;
 }
-/* .chat__input input::placeholder{
-    font-weight: 500 !important;
-} */
 .light__theme .chat__input input{
     background-color: #f1f3f5;
 }
@@ -295,11 +380,15 @@
     width: 4rem; height: 4rem;
     background-color: var(--bgColor);
     padding: 1.375rem;
+    -webkit-transition: all 0.2s;
+    -o-transition: all 0.2s;
     transition: all 0.2s;
 }
 .chat__input button svg{
     width: 1.25rem; height: 1.25rem;
     fill: var(--currentColor);
+    -webkit-transition: all 0.2s;
+    -o-transition: all 0.2s;
     transition: all 0.2s;
 }
 .chat__input button:hover{
@@ -309,9 +398,16 @@
     fill: #fff;
 }
 
-.modal__content .task__title{
-    font-size: 2rem;
-    font-weight: 500;
+#openChatButton{
+    display: none;
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    height: 4rem; width: 4rem;
+    padding: 1.25rem;
+    border-radius: 2rem;
+    background-color: var(--currentColor);
+}
+#openChatButton svg{
+    fill: #fff;
 }
 
 
@@ -322,4 +418,213 @@
     padding: 0 1rem;
     font-size: 1.125rem;
     color: var(--text-primary-color);
+}
+
+@media screen and (max-width: 1400px){
+    .Tab, header{
+        width: 100% !important;
+    }
+    .chat{
+        display: none;
+        height: calc(100% - 2rem);
+        margin: 1rem;
+        max-width: calc(100% - 2rem);
+    }
+    .chat__header{
+        display: block;
+    }
+    .chat__history{
+        height: calc(100% - 8.5rem);
+    }
+    #openChatButton{
+        display: block;
+    }
+}
+@media screen and (max-width: 1100px){
+    .board{
+        width: 100%;
+        overflow: auto;
+        -ms-scroll-snap-type: x mandatory;
+            scroll-snap-type: x mandatory;
+    }
+    .board__section{
+        scroll-snap-align: start;
+        min-width: 16rem;
+    }
+}
+@media screen and (max-width: 740px){
+    #openChatButton{
+        bottom: 5rem; right: 1rem;
+    }
+    .chat{
+        height: calc(100% - 2rem - 4rem);
+    }
+}
+@media screen and (max-width: 400px){
+    .board__section{
+        min-width: calc(100% - 4rem);
+    }
+}
+
+
+/* Заявки */
+.applications{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; gap: 0.75rem;
+}
+.application{
+    width: 100%;
+    background-color: var(--item-bg-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: var(--theme-light) solid 1px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; gap: 0.5rem;
+}
+.application__header{
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between;
+}
+
+.application__user{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; gap: 0.5rem;
+    padding: 0.375rem;
+    width: 16rem; height: 3rem;
+    border-radius: 1.5rem;
+}
+.application__user:hover{
+    background-color: var(--theme-light);
+}
+.application__user .avatar{
+    width: 2.25rem; height: 2.25rem;
+}
+.application__userName{
+    font-weight: 500;
+    color: var(--text-primary-color);
+    margin-bottom: -0.0625rem;
+}
+.application__userRole{
+    font-size: 0.875rem;
+}
+.application__text{
+    font-size: 1.125rem;
+}
+.application__buttons .combinedButton p{
+    color: var(--text-primary-color);
+    font-size: 1.125rem;
+}
+.application__buttons .dismiss:hover{
+    background-color: var(--theme-light-alpha);
+}
+.application__buttons .dismiss:hover svg{
+    fill: tomato;
+}
+
+
+@media screen and (max-width: 576px){
+    .application .combinedButton p{
+        display: none;
+    }
+}
+
+
+table{
+    border-spacing: 0 0;
+    border: var(--theme-light)  solid 1px;
+    border-radius: 0.5rem;
+}
+thead tr{
+    background-color: var(--currentColor);
+    height: 2.25rem;
+}
+thead tr th{
+    padding: 0 0.75rem;
+}
+thead tr th:not(:last-of-type){
+    min-width: 8rem;
+}
+thead tr th p{
+    font-weight: 500;
+    color: #fff;
+    white-space: nowrap;
+}
+thead tr th:first-of-type{
+    border-radius: 0.5rem 0 0 0;
+}
+thead tr th:last-of-type{
+    border-radius: 0 0.5rem 0 0;
+}
+tr, td{
+    height: 3rem;
+}
+
+tbody tr td{
+    background-color: var(--item-bg-color);
+}
+tbody tr td:last-of-type{
+    padding: 0.5rem;
+}
+tbody tr td:last-of-type .relativeBox > button{
+    width: 2rem; height: 2rem;
+    min-width: 2rem !important;
+    padding: 0 0.5rem;
+}
+td, th{
+    background-color: unset;
+    border-radius: 0;
+}
+tbody tr:last-of-type td:first-of-type{
+    border-radius: 0 0 0 0.5rem;
+}
+tbody tr:last-of-type td:last-of-type{
+    border-radius: 0 0 0.5rem 0;
+}
+td p{
+    font-weight: 500;
+    color: var(--text-primary-color);
+    line-height: 1.5rem;
+    white-space: nowrap;
+}
+td h3{
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    color: var(--text-primary-color);
+}
+td.student{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; gap: 0.75rem; -webkit-box-align: center; -ms-flex-align: center; align-items: center;
+    min-width: 16rem;
+}
+td.student .avatar{
+    width: 1.5rem; height: 1.5rem;
+}
+td.student .student__name{
+    color: var(--text-primary-color);
+}
+
+@media screen and (max-width: 660px){
+    tr td:nth-of-type(3),
+    tr th:nth-of-type(3),
+    tr td:nth-of-type(4),
+    tr th:nth-of-type(4),
+    tr td:nth-of-type(5),
+    tr th:nth-of-type(5){
+        display: none;
+    }
+    th.student{
+        width: calc(100% - 13rem);
+    }
+}
+
+
+
+.modal__content:not(:first-of-type){
+    display: none;
 }

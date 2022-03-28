@@ -1,6 +1,6 @@
-from django import forms
-from .models import KvantTaskBase, KvantTaskMark, KvantHomeTask
 from CoreApp.services.m2m import FileM2MBaseMixin
+from DiaryApp.models import KvantLesson, KvantTaskBase, KvantTaskMark
+from django import forms
 
 
 class KvantMarkSaveForm(forms.ModelForm):
@@ -62,3 +62,9 @@ class KvantLessonFilesSaveForm(KvantBaseFilesSaveForm):
 class KvantTaskFilesSaveForm(KvantBaseFilesSaveForm):
     def getFileUploadPath(self):
         return f'tasks/{self.instance.title}'
+
+
+class KvantLessonSaveForm(forms.ModelForm):
+    class Meta:
+        model = KvantLesson
+        fields = ['date', 'course', 'base']

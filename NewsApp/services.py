@@ -16,8 +16,8 @@ def getNewsById(id):
 
 
 class NewsObjectManipulationManager(ObjectManipulationManager):
-    def _constructRedirectUrl(self, obj):
-        return rl('detail_news', kwargs={'news_identifier': obj.id})
+    def _constructRedirectUrl(self, **kwargs):
+        return rl('detail_news', kwargs={'news_identifier': kwargs.get('obj').id})
 
 
 class NewsExistsMixin(KvantObjectExistsMixin):
@@ -38,4 +38,4 @@ class NewsAccessMixin(NewsExistsMixin):
     
     def _newsAccessTest(self, news, user):
         """ Тест на авторство """
-        return news.author == user
+        return news.author == user or user.permission == 'Администратор'

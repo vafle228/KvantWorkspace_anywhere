@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'CoreApp.apps.CoreAppConfig',
+    'ChatApp.apps.ChatAppConfig',
     'NewsApp.apps.NewsAppConfig',
     'MailApp.apps.MailAppConfig',
     'AdminApp.apps.AdminAppConfig',
@@ -49,8 +50,9 @@ INSTALLED_APPS = [
     'JournalApp.apps.JournalAppConfig',
     'ProjectApp.apps.ProjectAppConfig',
     'ProfileApp.apps.ProfileAppConfig',
+    'RegisterApp.apps.RegisterAppConfig',
 
-    'django_cleanup', 'storages',
+    'django_cleanup', 'storages', 'channels',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +84,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Config.wsgi.application'
+ASGI_APPLICATION = 'Config.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'LOCATION': '12935.c90.us-east-1-3.ec2.cloud.redislabs.com:12935',
+        'OPTIONS': {
+        	'PASSWORD': 'YgNm1EE3fJfixMQu7p7HHlrn4rXJKUC7'
+        },
+    },
+}
 
 
 # Database
@@ -139,14 +152,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 # AWS S3 Setup
-AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-
 AWS_STORAGE_BUCKET_NAME = 'kvant-journal'  # Имя бакета
 
 AWS_S3_FILE_OVERWRITE = False  # Запретить перезапись файла
@@ -162,3 +171,4 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # S3 default image location
 NEWS_DEFAULT_IMAGE = '/default/news.jpeg'
 USER_DEFAULT_IMAGE = '/default/user.png'
+PROJECT_DEFAULT_IMAGE = '/default/project.png'

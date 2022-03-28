@@ -2,7 +2,7 @@ from DiaryApp.models import KvantLesson, KvantTaskBase
 from CoreApp.services.access import KvantObjectExistsMixin
 from AdminApp.models import KvantCourse
 from AdminApp.services import getCourseById
-from .queryget import getLessonById, getBaseType
+from .queryget import getLessonById, getBaseType, getBaseById
 
 
 class KvantLessonAccessMixin(KvantObjectExistsMixin):
@@ -19,7 +19,7 @@ class KvantLessonAccessMixin(KvantObjectExistsMixin):
         return KvantLesson.objects.filter(id=object_id).exists()
     
     def _lessonAccessTest(self, user, lesson):
-        return lesson.course.teacher == user
+        return lesson.course.teacher == user or user.permission == 'Администратор'
 
 
 class KvantJournalAccessMixin(KvantObjectExistsMixin):
@@ -34,7 +34,7 @@ class KvantJournalAccessMixin(KvantObjectExistsMixin):
 
     def _journalAccessTest(self, user, course):
         """ Тест на возможность просматривать курс """
-        return course.teacher == user
+        return course.teacher == user or user.permission == 'Администратор'
 
     def _objectExiststTest(self, object_id):
         return KvantCourse.objects.filter(id=object_id).exists()
@@ -46,8 +46,8 @@ class KvantBaseAccessMixin(KvantObjectExistsMixin):
     
     def accessTest(self, **kwargs):
         if super().accessTest(**kwargs):
-            base = KvantTaskBase.objects.get(id=kwargs.get(self.request_object_arg))
-            return self._teacherAccessTest(kwargs.get('user'), base)
+            base = getBaseById(kwargs.get(self.request_object_arg))
+            return self._teacherAccessTest(kwargs.get('user'), base) or kwargs.get('user').permission == 'Администратор'
         return False
 
     def _objectExiststTest(self, object_id):

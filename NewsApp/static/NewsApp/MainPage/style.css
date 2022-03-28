@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
 
 /* Основной контейнер */
 .mainContainer{
@@ -15,68 +22,6 @@ header h3:not(.active):hover{
     color: var(--text-primary-color);
 }
 
-/* Виджет  "Сегодня" */
-/* #today{
-    width: 100%;
-}
-#today h1{
-    font-weight: 500;
-}
-#today .lesson{
-    width: 18rem; height: 7rem;
-    background-color: var(--item-bg-color);
-    border: var(--theme-light) solid 1px;
-    padding: 0.5rem 1rem;
-    display: flex; flex-direction: column; gap: 0.5rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-}
-#today .lesson:hover{
-    background-color: var(--theme-light);
-}
-#todayCarousel{
-    height: 7rem;
-}
-#todayCarousel .carousel__slide {
-    height: 7rem; width: 18rem;
-    overflow: hidden;
-    margin-right: 1rem;
-}
-
-#today .lesson__time{
-    text-align: left;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: var(--currentColor);
-}
-.lesson__info{
-    position: relative;
-    padding-left: 1rem;
-}
-.lesson__info::before{
-    content: "";
-    position: absolute; top: 0; left: 0;
-    width: 0.25rem; height: 100%;
-    background-color: var(--currentColor);
-    border-radius: 0.125rem;
-}
-#today .lesson__group{
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: var(--text-primary-color);
-}
-#today .lesson__topic{
-    font-size: 1.125rem;
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-#today .lesson svg{
-    width: 1.5rem; height: 1.5rem;
-    fill: var(--currentColor);
-} */
-
 /* Виджет "События" */
 #eventsWidget{
     width: calc(100% - 48rem - 1rem); height: 22rem;
@@ -85,12 +30,15 @@ header h3:not(.active):hover{
 
 .event{
     height: 22rem; width: 100%;
-    display: flex; flex-direction: row;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row;
     border-radius: 0.5rem;
 }
 .event__banner{
     width: calc(100% - 32rem); height: 22rem;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
 }
 .event__content{
     width: 32rem; height: 22rem;
@@ -117,6 +65,7 @@ header h3:not(.active):hover{
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
+    line-height: 1.375;
 }
 .event__button{
     margin-top: auto;
@@ -129,10 +78,12 @@ header h3:not(.active):hover{
     font-weight: 600;
 }
 .light__theme .event__button:hover{
-    filter: brightness(0.9);
+    -webkit-filter: brightness(0.9);
+            filter: brightness(0.9);
 }
 .dark__theme .event__button:hover{
-    filter: brightness(1.25);
+    -webkit-filter: brightness(1.25);
+            filter: brightness(1.25);
 }
 
 
@@ -153,19 +104,36 @@ header h3:not(.active):hover{
     border-radius: 0.5rem;
     background-color: var(--item-bg-color);
     cursor: pointer;
+    -webkit-transition: -webkit-transform .1s;
+    transition: -webkit-transform .1s;
+    -o-transition: transform .1s;
     transition: transform .1s;
+    transition: transform .1s, -webkit-transform .1s;
     padding: 0 1rem;
-    border: 1px solid var(--theme-light);
+    border: var(--theme-light) solid 1px;
 }
 .course:active{
-    transform: scale(0.98);
+    -webkit-transform: scale(0.99);
+        -ms-transform: scale(0.99);
+            transform: scale(0.99);
 }
 .form .course{
     pointer-events: none;
 }
 .course__illustration{
-    width: 4rem; height: 4rem;
-    margin: 0.5rem 0;
+    width: 3rem; height: 3rem;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    background-color: var(--theme-light);
+    fill: var(--currentColor);
+    margin: 1rem 0;
+}
+img.course__illustration{
+    padding: 0;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: center;
+       object-position: center;
 }
 .course__title{
     font-size: 1.25rem; font-weight: 500;
@@ -173,9 +141,10 @@ header h3:not(.active):hover{
     width: 12rem;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
 }
-.course svg{
+.course > svg:not(.course__illustration){
     width: 1rem; height: 1rem;
     fill: var(--text-primary-color);
     margin: 0 0.5rem;
@@ -212,28 +181,33 @@ header h3:not(.active):hover{
     color: var(--text-primary-color);
     font-size: 1.125rem;
 }
-
 .newsContainer{
-    display: flex; flex-wrap: wrap; gap: 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 1rem;
 }
 
-/* Элемент новости */
+/* Новость */
 .newsItem{
     width: calc((100% - 3rem) / 4); height: 24rem;
     border-radius: 1rem;
     overflow: hidden;
     padding: 2rem;
-    display: flex; flex-direction: column; gap: 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; gap: 1rem;
     background-size: cover;
 }
 .newsItem:hover .newsItem__title{
     text-decoration: underline;
-    text-decoration-color: #eee;
+    -webkit-text-decoration-color: #eee;
+            text-decoration-color: #eee;
 }
 
-
 .newsItem__author{
-    display: flex; flex-direction: row; gap: 0.5rem; align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; gap: 0.5rem; -webkit-box-align: center; -ms-flex-align: center; align-items: center;
 }
 .newsItem__author img{
     width: 2rem; height: 2rem;
@@ -279,17 +253,28 @@ header h3:not(.active):hover{
 }
 @media screen and (max-width: 820px){
     #widgets{
-        flex-direction: column; gap: 2rem;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column; gap: 2rem;
     }
-    #scheduleWidget, #eventsWidget{
+    #scheduleWidget,
+    #eventsWidget{
         width: 100%;
     }
-    #eventsWidget, #eventsWidget .carousel__slide, #eventsWidget .carousel, #eventsWidget .carousel__viewport, #eventsWidget .carousel__track{
+    #eventsWidget,
+    #eventsWidget .carousel__slide,
+    #eventsWidget .carousel,
+    #eventsWidget .carousel__viewport,
+    #eventsWidget .carousel__track{
         height: 32rem !important;
     }
     .event{
         height: 32rem;
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
     }
     .event__banner{
         width: 100%; height: 10rem;
@@ -298,22 +283,20 @@ header h3:not(.active):hover{
         width: 100%;
     }
     .lesson.inactive{
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
     }
 }
 
 @media screen and (max-width: 740px){
     .mainContainer{
-        padding: 1rem;
+        padding: 1.5rem;
     }
     .newsItem{
         width: 100%;
     }
-    #scheduleWidget, #eventsWidget, #today{
-        padding: 1rem;
-    }
 }
-
 @media screen and (max-width: 576px){
     .lesson.inactive{
         display: none;
@@ -321,6 +304,7 @@ header h3:not(.active):hover{
 }
 
 
+/* Карусель */
 .carousel{
     color: var(--text-primary-color);
 
@@ -334,9 +318,10 @@ header h3:not(.active):hover{
 }
 .carousel__button{
     opacity: 0;
+    -webkit-transition: all .4s;
+    -o-transition: all .4s;
     transition: all .4s;
 }
-
 #eventCarousel .carousel__slide {
     height: 22rem; width: 100% !important;
     border-radius: 0.5rem;
@@ -347,9 +332,10 @@ header h3:not(.active):hover{
     border: 1px solid var(--theme-light);
 }
 .carousel__dots{
-    transform: translate(0, -0.5rem);
+    -webkit-transform: translate(0, -0.5rem);
+        -ms-transform: translate(0, -0.5rem);
+            transform: translate(0, -0.5rem);
 }
-
 .carousel__dot::after{
     width: 1.125rem !important;
     border-radius: 0.2rem !important;

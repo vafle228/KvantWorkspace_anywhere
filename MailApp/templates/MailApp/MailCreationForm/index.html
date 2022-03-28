@@ -3,6 +3,7 @@
     <form>
         <div class="form__cell row newMailItemForm__header space-between">
             <h3>Новое сообщение</h3>
+
             <div>
                 <button class='windowButton' type="button" onclick="updateFormCondition(this)">
                     <svg viewBox="0 0 448 512">
@@ -21,10 +22,20 @@
 
         <div class="form__cell row g8" style='align-items: flex-start;'>
             <p style='line-height: 27.2px'>Кому:</p>
-            <div id="selectedUsers">
-                <input type="text" onkeyup="filterFunction(this)" id='userSearch' autocomplete="off">
+            <div id="selectedUsers" class="selectedUsers">
+                <input type="text" onkeyup="filterFunction(input=this, select=$('#newMailItem__userSelect'), option='.userSelect__user', parameter='.userSelect__userName', hide=true)" id='userSearch' style='line-height: 2rem' autocomplete="off">
             </div>
-            
+        </div>
+        <div class="userSelect" id='newMailItem__userSelect'>
+            {% for kvant_user in kvant_users %}
+            <div class="userSelect__user row" value='{{ kvant_user.id }}'>
+                <img src="{{ kvant_user.image.url }}" class='userSelect__userImage'>
+                <div class="userSelect__userInfo">
+                    <h3 class="userSelect__userName">{{ kvant_user.surname }} {{ kvant_user.name }}</h3>
+                    <p class="userSelect__userRole">{{ kvant_user.permission }}</p>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
         <div class="form__cell">
@@ -50,19 +61,6 @@
             </button>
             <input id="file-input" type="file" name="name" style="display: none;" onchange='addMailFileHandler(event)' multiple/>
         </div>
-
-        <div class="userSelect" id='newMailItem__userSelect' style="display: none;">
-            {% for kvant_user in kvant_users %}
-            <div class="userSelect__user row" value={{ kvant_user.id }}>
-                <img src="{{ kvant_user.image.url }}" class='userSelect__userImage'>
-                <div class="userSelect__userInfo">
-                    <h3 class="userSelect__userName">{{ kvant_user.surname }} {{ kvant_user.name }}</h3>
-                    <p class="userSelect__userRole">{{ kvant_user.permission }}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        
     </form>
 </div>
 
