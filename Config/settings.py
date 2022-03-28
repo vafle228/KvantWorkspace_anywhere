@@ -155,10 +155,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIR = [os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')]
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 # AWS S3 Setup
 AWS_STORAGE_BUCKET_NAME = 'kvant-journal'  # Имя бакета
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
