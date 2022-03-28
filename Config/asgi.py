@@ -19,7 +19,6 @@ from ChatApp import routing as chat_routing
 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Config.settings')
-django.setup()
 
 django_asgi_app = get_asgi_application()
 
