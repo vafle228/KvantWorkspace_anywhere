@@ -47,7 +47,7 @@
         const roomName = '{{ project.project.id }}';
 
         const chatSocket = new WebSocket(
-            'ws://' + window.location.host + '/chat/' + roomName + '/');
+            'wss://' + window.location.host + '/chat/' + roomName + '/');
 
         chatSocket.onmessage = function(event) {
             const data = JSON.parse(event.data);
